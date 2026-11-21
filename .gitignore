@@ -1,0 +1,14 @@
+# .gitignore
+# Files listed here are NOT uploaded to GitHub — they stay on your computer only.
+
+# .env holds your secret MongoDB connection string — never share this
+.env
+
+# Python cache folders — created automatically, not needed in the repo
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment folder (if you create one)
+venv/
+env/

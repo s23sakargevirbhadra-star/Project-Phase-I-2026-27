@@ -1,0 +1,720 @@
+test_forgot_password_page_loads (test_auth.TestForgotPassword.test_forgot_password_page_loads)
+GET /forgot-password must return 200 and show the form. ... ok
+test_known_email_shows_same_safe_message (test_auth.TestForgotPassword.test_known_email_shows_same_safe_message)
+POSTing a registered email must show the SAME safe message. ... ok
+test_reset_otp_saved_for_known_email (test_auth.TestForgotPassword.test_reset_otp_saved_for_known_email)
+After /forgot-password, a reset_otp must be saved in MongoDB. ... FAIL
+test_unknown_email_shows_safe_message (test_auth.TestForgotPassword.test_unknown_email_shows_safe_message)
+POSTing an email that is NOT registered must still show the safe ... ok
+test_login_page_loads (test_auth.TestLogin.test_login_page_loads)
+GET /login must return the login form (status 200). ... ok
+test_unknown_email_rejected (test_auth.TestLogin.test_unknown_email_rejected)
+An email not in the database must show an error. ... ok
+test_unverified_user_cannot_login (test_auth.TestLogin.test_unverified_user_cannot_login)
+A user who has not verified their email must be sent to /verify. ... ok
+test_verified_user_can_login (test_auth.TestLogin.test_verified_user_can_login)
+A verified user with correct credentials must be redirected to /. ... FAIL
+test_wrong_password_rejected (test_auth.TestLogin.test_wrong_password_rejected)
+An incorrect password must show an error and stay on the login page. ... FAIL
+test_correct_otp_clears_otp_field (test_auth.TestOTP.test_correct_otp_clears_otp_field)
+After successful verification, the OTP field must be cleared. ... ok
+test_correct_otp_marks_verified (test_auth.TestOTP.test_correct_otp_marks_verified)
+The correct OTP must set is_verified=True in MongoDB. ... ok
+test_correct_otp_redirects_to_login (test_auth.TestOTP.test_correct_otp_redirects_to_login)
+After successful verification, user must be redirected to /login. ... ok
+test_wrong_otp_rejected (test_auth.TestOTP.test_wrong_otp_rejected)
+An incorrect OTP must show an error and stay on the verify page. ... ok
+test_correct_otp_changes_password (test_auth.TestResetPassword.test_correct_otp_changes_password)
+The correct OTP with a valid new password must update the hash. ... FAIL
+test_expired_otp_is_rejected (test_auth.TestResetPassword.test_expired_otp_is_rejected)
+An OTP whose expiry has passed must show 'expired', not 'ok'. ... FAIL
+test_five_wrong_attempts_locks_the_user (test_auth.TestResetPassword.test_five_wrong_attempts_locks_the_user)
+After 5 wrong OTP guesses the user must see a 'locked' message. ... FAIL
+test_mismatched_new_passwords_rejected (test_auth.TestResetPassword.test_mismatched_new_passwords_rejected)
+New password and confirm must match. ... FAIL
+test_new_password_works_after_reset (test_auth.TestResetPassword.test_new_password_works_after_reset)
+After a successful reset the new password must allow login. ... FAIL
+test_old_password_no_longer_works_after_reset (test_auth.TestResetPassword.test_old_password_no_longer_works_after_reset)
+After a successful reset the old password must be rejected on login. ... FAIL
+test_resend_reset_otp_resets_attempt_counter (test_auth.TestResetPassword.test_resend_reset_otp_resets_attempt_counter)
+After being locked (5 wrong attempts), requesting a new code ... FAIL
+test_reset_otp_cleared_after_success (test_auth.TestResetPassword.test_reset_otp_cleared_after_success)
+After a successful reset the reset_otp field must be None. ... ok
+test_reset_password_page_loads (test_auth.TestResetPassword.test_reset_password_page_loads)
+GET /reset-password must return 200 when reset_email is in session. ... FAIL
+test_short_new_password_rejected (test_auth.TestResetPassword.test_short_new_password_rejected)
+A new password shorter than 8 characters must be rejected. ... FAIL
+test_wrong_otp_increments_attempt_counter (test_auth.TestResetPassword.test_wrong_otp_increments_attempt_counter)
+Each wrong OTP guess must increase reset_attempts by 1. ... FAIL
+test_wrong_otp_is_rejected (test_auth.TestResetPassword.test_wrong_otp_is_rejected)
+An incorrect reset OTP must show an error and stay on the page. ... FAIL
+test_duplicate_email_rejected (test_auth.TestSignup.test_duplicate_email_rejected)
+Signing up with an already-used email must show an error, not redirect. ... ok
+test_mismatched_passwords_rejected (test_auth.TestSignup.test_mismatched_passwords_rejected)
+Passwords that do not match must be rejected. ... ok
+test_new_user_is_not_verified (test_auth.TestSignup.test_new_user_is_not_verified)
+A newly signed-up user must have is_verified = False. ... ok
+test_otp_is_generated_on_signup (test_auth.TestSignup.test_otp_is_generated_on_signup)
+After signup, the user document must have an OTP and expiry set. ... ok
+test_password_is_hashed_not_plain (test_auth.TestSignup.test_password_is_hashed_not_plain)
+The password stored in MongoDB must NOT be the plain text password. ... ok
+test_short_password_rejected (test_auth.TestSignup.test_short_password_rejected)
+A password shorter than 8 characters must be rejected. ... ok
+test_signup_page_loads (test_auth.TestSignup.test_signup_page_loads)
+GET /signup must return the signup form (status 200). ... ok
+test_user_saved_in_mongodb (test_auth.TestSignup.test_user_saved_in_mongodb)
+After signup, a user document must exist in MongoDB. ... ok
+test_valid_signup_redirects_to_verify (test_auth.TestSignup.test_valid_signup_redirects_to_verify)
+A valid signup must redirect to /verify. ... ok
+test_apply_does_not_modify_original (test_features.TestApplyLanguage.test_apply_does_not_modify_original)
+apply_language must return a copy â€” the original must be unchanged. ... ok
+test_apply_en_keeps_english (test_features.TestApplyLanguage.test_apply_en_keeps_english) ... ok
+test_apply_keeps_non_text_fields (test_features.TestApplyLanguage.test_apply_keeps_non_text_fields)
+id, city, rating etc. must stay unchanged after apply_language. ... ok
+test_apply_mr_translates_description (test_features.TestApplyLanguage.test_apply_mr_translates_description) ... ok
+test_apply_mr_translates_name (test_features.TestApplyLanguage.test_apply_mr_translates_name) ... ok
+test_already_clean (test_features.TestCleanEmail.test_already_clean) ... ok
+test_both_strip_and_lower (test_features.TestCleanEmail.test_both_strip_and_lower) ... ok
+test_converts_to_lowercase (test_features.TestCleanEmail.test_converts_to_lowercase) ... ok
+test_empty_string (test_features.TestCleanEmail.test_empty_string) ... ok
+test_none_returns_empty_string (test_features.TestCleanEmail.test_none_returns_empty_string) ... ok
+test_strips_spaces (test_features.TestCleanEmail.test_strips_spaces) ... ok
+test_all_returns_all (test_features.TestFilterBySeason.test_all_returns_all)
+'all' (case-insensitive) means no filter. ... ok
+test_all_uppercase_returns_all (test_features.TestFilterBySeason.test_all_uppercase_returns_all)
+'ALL' should also return all â€” case-insensitive. ... ok
+test_case_insensitive (test_features.TestFilterBySeason.test_case_insensitive)
+'MONSOON' (uppercase) should match the same as 'monsoon'. ... ok
+test_does_not_include_wrong_season (test_features.TestFilterBySeason.test_does_not_include_wrong_season)
+Filtering 'monsoon' must NOT include Place D (summer only). ... ok
+test_empty_string_returns_all (test_features.TestFilterBySeason.test_empty_string_returns_all)
+Empty string means no filter â€” return all 5 places. ... ok
+test_filter_monsoon (test_features.TestFilterBySeason.test_filter_monsoon)
+'monsoon' should return places A, C, and E. ... ok
+test_filter_summer (test_features.TestFilterBySeason.test_filter_summer)
+'summer' should return places B, D, and E. ... ok
+test_filter_winter (test_features.TestFilterBySeason.test_filter_winter)
+'winter' should return places A, B, and E. ... ok
+test_none_returns_all (test_features.TestFilterBySeason.test_none_returns_all)
+None means no filter. ... ok
+test_nonexistent_season_returns_empty (test_features.TestFilterBySeason.test_nonexistent_season_returns_empty)
+A season that no place has should return an empty list. ... ok
+test_returns_a_list (test_features.TestFilterBySeason.test_returns_a_list)
+filter_by_season must always return a Python list. ... ok
+test_english_message (test_features.TestGetMessage.test_english_message)
+get_message returns English text when lang='en'. ... ok
+test_fallback_to_english_for_unknown_lang (test_features.TestGetMessage.test_fallback_to_english_for_unknown_lang)
+An unknown lang code falls back to English. ... ok
+test_marathi_message (test_features.TestGetMessage.test_marathi_message)
+get_message returns Marathi text when lang='mr'. ... FAIL
+test_missing_key_returns_key (test_features.TestGetMessage.test_missing_key_returns_key)
+A missing key returns the key string itself. ... ok
+test_reset_success_marathi (test_features.TestGetMessage.test_reset_success_marathi)
+Password changed message is correct in Marathi. ... FAIL
+test_set_language_persists_in_session (test_features.TestGetMessage.test_set_language_persists_in_session)
+POST /set-language mr then GET a page â€” flash messages in Marathi. ... ok
+test_signup_success_english (test_features.TestGetMessage.test_signup_success_english)
+Signup success message is correct in English. ... ok
+test_signup_success_marathi (test_features.TestGetMessage.test_signup_success_marathi)
+Signup success message is correct in Marathi. ... FAIL
+test_get_text_description_mr (test_features.TestGetText.test_get_text_description_mr)
+get_text works for description field in Marathi. ... ok
+test_get_text_en_returns_english (test_features.TestGetText.test_get_text_en_returns_english)
+When lang='en', always return the English value. ... ok
+test_get_text_local_tip_mr (test_features.TestGetText.test_get_text_local_tip_mr)
+get_text works for local_tip field in Marathi. ... ok
+test_get_text_mr_fallback_when_empty (test_features.TestGetText.test_get_text_mr_fallback_when_empty)
+When lang='mr' but _mr field is empty string, fall back to English. ... ok
+test_get_text_mr_fallback_when_missing (test_features.TestGetText.test_get_text_mr_fallback_when_missing)
+When lang='mr' but _mr field is absent, fall back to English. ... ok
+test_get_text_mr_fallback_when_whitespace (test_features.TestGetText.test_get_text_mr_fallback_when_whitespace)
+When lang='mr' but _mr field is only whitespace, fall back to English. ... ok
+test_get_text_mr_returns_marathi (test_features.TestGetText.test_get_text_mr_returns_marathi)
+When lang='mr' and Marathi value exists, return Marathi. ... ok
+test_dots_in_username (test_features.TestIsValidEmail.test_dots_in_username) ... ok
+test_double_at (test_features.TestIsValidEmail.test_double_at)
+'a@b@c.com' has two @ symbols â€” invalid. ... ok
+test_empty_string (test_features.TestIsValidEmail.test_empty_string)
+Empty string â€” invalid. ... ok
+test_hyphen_in_domain (test_features.TestIsValidEmail.test_hyphen_in_domain) ... ok
+test_just_letters (test_features.TestIsValidEmail.test_just_letters)
+'abc' has no @ â€” invalid. ... ok
+test_just_numbers (test_features.TestIsValidEmail.test_just_numbers)
+'1234' has no @ or domain â€” clearly invalid. ... ok
+test_missing_domain_after_at (test_features.TestIsValidEmail.test_missing_domain_after_at)
+'abc@' has nothing after @ â€” invalid. ... ok
+test_missing_tld (test_features.TestIsValidEmail.test_missing_tld)
+'abc@gmail' has no dot + extension after gmail â€” invalid. ... ok
+test_missing_username_before_at (test_features.TestIsValidEmail.test_missing_username_before_at)
+'@gmail.com' has nothing before @ â€” invalid. ... ok
+test_none (test_features.TestIsValidEmail.test_none)
+None â€” invalid (should not raise an exception). ... ok
+test_one_letter_tld (test_features.TestIsValidEmail.test_one_letter_tld)
+'abc@gmail.c' has only 1 letter after the dot â€” invalid. ... ok
+test_plus_tag (test_features.TestIsValidEmail.test_plus_tag)
+name+tag@domain.org is a valid tagged address. ... ok
+test_space_in_email (test_features.TestIsValidEmail.test_space_in_email)
+'abc @gmail.com' has a space â€” invalid. ... ok
+test_standard_gmail (test_features.TestIsValidEmail.test_standard_gmail) ... ok
+test_subdomain_edu (test_features.TestIsValidEmail.test_subdomain_edu)
+a.b@college.edu.in is a real Indian college email format. ... ok
+test_too_long (test_features.TestIsValidEmail.test_too_long)
+An address over 100 characters must be rejected (101 chars here). ... ok
+test_two_letter_tld (test_features.TestIsValidEmail.test_two_letter_tld)
+uk is a valid 2-letter top-level domain. ... ok
+test_underscore_in_username (test_features.TestIsValidEmail.test_underscore_in_username)
+user_name@domain.com is a valid email â€” underscore is allowed. ... ok
+test_api_places_lang_en_returns_english_name (test_features.TestLanguageAPI.test_api_places_lang_en_returns_english_name)
+/api/places?lang=en must return English name for place id=1. ... ok
+test_api_places_lang_mr_returns_marathi_name (test_features.TestLanguageAPI.test_api_places_lang_mr_returns_marathi_name)
+/api/places?lang=mr must return Marathi name for place id=1. ... ok
+test_api_recommend_lang_mr (test_features.TestLanguageAPI.test_api_recommend_lang_mr)
+/api/recommend with lang=mr must return Marathi names. ... ok
+test_api_search_finds_by_marathi_name (test_features.TestLanguageAPI.test_api_search_finds_by_marathi_name)
+/api/search must find places by their Marathi name. ... FAIL
+test_set_language_invalid_ignored (test_features.TestLanguageAPI.test_set_language_invalid_ignored)
+An invalid lang value must be ignored and 'en' used instead. ... ok
+test_set_language_route (test_features.TestLanguageAPI.test_set_language_route)
+/set-language must save lang in session and return ok. ... ok
+test_all_places_have_best_time (test_features.TestPlaceInfoFields.test_all_places_have_best_time) ... ok
+test_all_places_have_entry_fee (test_features.TestPlaceInfoFields.test_all_places_have_entry_fee)
+Every place must have an entry_fee field. ... ok
+test_all_places_have_local_tip (test_features.TestPlaceInfoFields.test_all_places_have_local_tip) ... ok
+test_all_places_have_seasons (test_features.TestPlaceInfoFields.test_all_places_have_seasons) ... ok
+test_all_places_have_time_needed (test_features.TestPlaceInfoFields.test_all_places_have_time_needed) ... ok
+test_all_places_have_timings (test_features.TestPlaceInfoFields.test_all_places_have_timings) ... ok
+test_api_places_has_new_fields (test_features.TestPlaceInfoFields.test_api_places_has_new_fields)
+GET /api/places must return places with the new fields. ... ok
+test_check_locally_is_valid_value (test_features.TestPlaceInfoFields.test_check_locally_is_valid_value)
+Some places may have 'Check locally' â€” that is valid, not an error. ... ok
+test_entry_fee_not_empty (test_features.TestPlaceInfoFields.test_entry_fee_not_empty)
+entry_fee must not be an empty string. ... ok
+test_seasons_only_valid_values (test_features.TestPlaceInfoFields.test_seasons_only_valid_values)
+Each season value must be monsoon, winter, or summer. ... ok
+test_seasons_uses_pipe_separator (test_features.TestPlaceInfoFields.test_seasons_uses_pipe_separator)
+The seasons field must use | as separator, not commas. ... ok
+test_search_api_empty_q_returns_all (test_features.TestSearchAPI.test_search_api_empty_q_returns_all)
+/api/search with no q param (or empty q) should return all places. ... ok
+test_search_api_no_match_returns_empty_list (test_features.TestSearchAPI.test_search_api_no_match_returns_empty_list)
+/api/search?q=xyznotreal should return an empty JSON list. ... ok
+test_search_api_returns_matching_places (test_features.TestSearchAPI.test_search_api_returns_matching_places)
+/api/search?q=Mumbai should return only Mumbai places from the real DB. ... ok
+test_search_requires_login (test_features.TestSearchAPI.test_search_requires_login)
+/api/search must return 401 (Unauthorized) if the user is not logged in. ... ok
+test_search_returns_json_list_when_logged_in (test_features.TestSearchAPI.test_search_returns_json_list_when_logged_in)
+/api/search must return a JSON list when the user is logged in. ... ok
+test_empty_string_returns_all (test_features.TestSearchPlaces.test_empty_string_returns_all)
+An empty search string should return all places unchanged. ... ok
+test_no_match_returns_empty_list (test_features.TestSearchPlaces.test_no_match_returns_empty_list)
+A search that matches nothing should return an empty list. ... ok
+test_none_returns_all (test_features.TestSearchPlaces.test_none_returns_all)
+None as the search text should also return all places. ... ok
+test_returns_a_list (test_features.TestSearchPlaces.test_returns_a_list)
+search_places() must always return a Python list. ... ok
+test_returns_list_of_dicts (test_features.TestSearchPlaces.test_returns_list_of_dicts)
+Every item in the result must be a dictionary (a place dict). ... ok
+test_search_by_category (test_features.TestSearchPlaces.test_search_by_category)
+Searching 'temple' should return only Temple places. ... ok
+test_search_by_city (test_features.TestSearchPlaces.test_search_by_city)
+Searching 'Mumbai' should return all Mumbai places. ... ok
+test_search_by_name_exact_word (test_features.TestSearchPlaces.test_search_by_name_exact_word)
+'fort' should match Shaniwar Wada and Sinhagad Fort (both have 'fort' in name). ... ok
+test_search_by_partial_name (test_features.TestSearchPlaces.test_search_by_partial_name)
+'gateway' should match 'Gateway of India'. ... ok
+test_search_case_insensitive_mixed (test_features.TestSearchPlaces.test_search_case_insensitive_mixed)
+'FoRt' (mixed case) should still find fort places. ... ok
+test_search_case_insensitive_upper (test_features.TestSearchPlaces.test_search_case_insensitive_upper)
+'FORT' (uppercase) should return the same results as 'fort' (lowercase). ... ok
+test_search_city_case_insensitive (test_features.TestSearchPlaces.test_search_city_case_insensitive)
+'MUMBAI' should find the same places as 'mumbai'. ... ok
+test_search_matches_across_fields (test_features.TestSearchPlaces.test_search_matches_across_fields)
+'nanded' should match Hazur Sahib Gurudwara because its city is 'Nanded', ... ok
+test_search_nature_category (test_features.TestSearchPlaces.test_search_nature_category)
+'nature' should match places in the Nature category. ... ok
+test_whitespace_only_returns_all (test_features.TestSearchPlaces.test_whitespace_only_returns_all)
+A string of only spaces should be treated as empty â€” return all. ... ok
+test_season_combined_with_category (test_features.TestSeasonAPI.test_season_combined_with_category)
+Both category and season filters should work together. ... ok
+test_season_param_empty_returns_all (test_features.TestSeasonAPI.test_season_param_empty_returns_all)
+/api/recommend without season param should return all categories. ... ok
+test_season_param_monsoon (test_features.TestSeasonAPI.test_season_param_monsoon)
+/api/recommend with season=monsoon must return only monsoon places. ... ok
+test_invalid_email_not_saved_in_mongodb (test_features.TestSignupEmailValidation.test_invalid_email_not_saved_in_mongodb)
+No user document must be created in MongoDB when the email is invalid. ... ok
+test_invalid_email_shows_error_message (test_features.TestSignupEmailValidation.test_invalid_email_shows_error_message)
+The response must contain the validation error message. ... ok
+test_invalid_email_signup_stays_on_page (test_features.TestSignupEmailValidation.test_invalid_email_signup_stays_on_page)
+POSTing '1234' as the email must stay on the signup page (200), ... ok
+test_valid_email_passes_validation (test_features.TestSignupEmailValidation.test_valid_email_passes_validation)
+A proper email like test_valid@example.com must be accepted. ... ok
+test_api_city_centres_endpoint (test_nanded.TestGetCityCentres.test_api_city_centres_endpoint)
+GET /api/city-centres must return 6 cities with lat/lon. ... ok
+test_each_city_has_lat_and_lon (test_nanded.TestGetCityCentres.test_each_city_has_lat_and_lon)
+Every city centre must have a 'lat' and 'lon' key. ... ok
+test_has_all_6_cities (test_nanded.TestGetCityCentres.test_has_all_6_cities)
+get_city_centres() must have all 6 cities as keys. ... ok
+test_nanded_centre_is_reasonable (test_nanded.TestGetCityCentres.test_nanded_centre_is_reasonable)
+Nanded centre coordinates must be within Maharashtra's bounds. ... ok
+test_returns_dict (test_nanded.TestGetCityCentres.test_returns_dict)
+get_city_centres() must return a dictionary. ... ok
+test_api_nearest_city_endpoint (test_nanded.TestGetNearestCity.test_api_nearest_city_endpoint)
+GET /api/nearest-city?lat=19.14&lon=77.32 must return Nanded. ... ok
+test_api_nearest_city_missing_params (test_nanded.TestGetNearestCity.test_api_nearest_city_missing_params)
+GET /api/nearest-city without lat/lon must return 400. ... ok
+test_mumbai_coords_return_mumbai (test_nanded.TestGetNearestCity.test_mumbai_coords_return_mumbai)
+A user in Mumbai must get 'Mumbai' as nearest city. ... ok
+test_nagpur_coords_return_nagpur (test_nanded.TestGetNearestCity.test_nagpur_coords_return_nagpur)
+A user in Nagpur must get 'Nagpur' as nearest city. ... ok
+test_nanded_coords_return_nanded (test_nanded.TestGetNearestCity.test_nanded_coords_return_nanded)
+A user standing in Nanded city centre must get 'Nanded' as nearest city. ... ok
+test_pune_coords_return_pune (test_nanded.TestGetNearestCity.test_pune_coords_return_pune)
+A user in Pune must get 'Pune' as nearest city. ... ok
+test_returns_a_string (test_nanded.TestGetNearestCity.test_returns_a_string)
+get_nearest_city() must return a string. ... ok
+test_get_cities_returns_6 (test_nanded.TestNandedData.test_get_cities_returns_6)
+get_cities() must return exactly 6 cities. ... ok
+test_hazur_sahib_is_present (test_nanded.TestNandedData.test_hazur_sahib_is_present)
+Hazur Sahib Gurudwara must be in the dataset. ... ok
+test_nanded_api_cities_endpoint (test_nanded.TestNandedData.test_nanded_api_cities_endpoint)
+GET /api/cities must include Nanded. ... ok
+test_nanded_in_get_cities (test_nanded.TestNandedData.test_nanded_in_get_cities)
+get_cities() must now include Nanded. ... ok
+test_nanded_places_have_correct_city_name (test_nanded.TestNandedData.test_nanded_places_have_correct_city_name)
+All Nanded places must have city == 'Nanded' (exact, no typo). ... ok
+test_nanded_places_in_mongodb (test_nanded.TestNandedData.test_nanded_places_in_mongodb)
+MongoDB must have at least 8 Nanded places. ... ok
+test_nanded_total_places (test_nanded.TestNandedData.test_nanded_total_places)
+MongoDB must have 53 total places (45 original + 8 Nanded). ... ok
+test_nanded_location_returns_nanded_places (test_nanded.TestNandedRecommendations.test_nanded_location_returns_nanded_places)
+A user at Nanded centre (19.1383, 77.3210) within 50 km must ... ok
+test_nearest_places_fallback_returns_5 (test_nanded.TestNandedRecommendations.test_nearest_places_fallback_returns_5)
+GET /api/nearest-places must return exactly 5 places regardless of radius. ... ok
+test_nearest_places_sorted_by_distance (test_nanded.TestNandedRecommendations.test_nearest_places_sorted_by_distance)
+/api/nearest-places must return places sorted closest-first. ... ok
+test_user_far_away_gets_fallback (test_nanded.TestNandedRecommendations.test_user_far_away_gets_fallback)
+A user very far away (tiny radius) must get no results from /api/recommend. ... ok
+test_distance_is_symmetric (test_recommender.TestCalculateDistance.test_distance_is_symmetric) ... ok
+test_pune_to_mumbai_approx_120km (test_recommender.TestCalculateDistance.test_pune_to_mumbai_approx_120km) ... ok
+test_pune_to_nashik_approx_165km (test_recommender.TestCalculateDistance.test_pune_to_nashik_approx_165km) ... ok
+test_result_is_positive (test_recommender.TestCalculateDistance.test_result_is_positive) ... ok
+test_returns_a_float (test_recommender.TestCalculateDistance.test_returns_a_float) ... ok
+test_same_point_is_zero (test_recommender.TestCalculateDistance.test_same_point_is_zero) ... ok
+test_case_insensitive (test_recommender.TestFilterByCategory.test_case_insensitive) ... ok
+test_empty_string_returns_all (test_recommender.TestFilterByCategory.test_empty_string_returns_all) ... ok
+test_filter_forts (test_recommender.TestFilterByCategory.test_filter_forts) ... ok
+test_filter_temples (test_recommender.TestFilterByCategory.test_filter_temples) ... ok
+test_none_returns_all (test_recommender.TestFilterByCategory.test_none_returns_all) ... ok
+test_nonexistent_category_returns_empty (test_recommender.TestFilterByCategory.test_nonexistent_category_returns_empty) ... ok
+test_all_results_are_within_radius (test_recommender.TestFindNearbyPlaces.test_all_results_are_within_radius) ... ok
+test_distance_km_key_is_added (test_recommender.TestFindNearbyPlaces.test_distance_km_key_is_added) ... ok
+test_returns_a_list (test_recommender.TestFindNearbyPlaces.test_returns_a_list) ... ok
+test_small_radius_returns_fewer_places (test_recommender.TestFindNearbyPlaces.test_small_radius_returns_fewer_places) ... ok
+test_very_large_radius_returns_all_places (test_recommender.TestFindNearbyPlaces.test_very_large_radius_returns_all_places) ... ok
+test_zero_radius_returns_empty_or_only_exact (test_recommender.TestFindNearbyPlaces.test_zero_radius_returns_empty_or_only_exact) ... ok
+test_contains_expected_categories (test_recommender.TestGetAllCategories.test_contains_expected_categories) ... ok
+test_is_sorted_alphabetically (test_recommender.TestGetAllCategories.test_is_sorted_alphabetically) ... ok
+test_no_duplicates (test_recommender.TestGetAllCategories.test_no_duplicates) ... ok
+test_returns_8_categories (test_recommender.TestGetAllCategories.test_returns_8_categories) ... ok
+test_returns_a_list (test_recommender.TestGetAllCategories.test_returns_a_list) ... ok
+test_returns_a_list (test_recommender.TestGetCities.test_returns_a_list) ... ok
+test_returns_correct_city_names (test_recommender.TestGetCities.test_returns_correct_city_names) ... ok
+test_returns_exactly_6_cities (test_recommender.TestGetCities.test_returns_exactly_6_cities) ... ok
+test_category_filter_works (test_recommender.TestGetRecommendations.test_category_filter_works) ... ok
+test_each_result_has_distance_km (test_recommender.TestGetRecommendations.test_each_result_has_distance_km) ... ok
+test_empty_category_returns_all_categories (test_recommender.TestGetRecommendations.test_empty_category_returns_all_categories) ... ok
+test_first_result_has_highest_rating (test_recommender.TestGetRecommendations.test_first_result_has_highest_rating) ... ok
+test_nonexistent_category_returns_empty (test_recommender.TestGetRecommendations.test_nonexistent_category_returns_empty) ... ok
+test_results_are_within_radius (test_recommender.TestGetRecommendations.test_results_are_within_radius) ... ok
+test_returns_a_list (test_recommender.TestGetRecommendations.test_returns_a_list) ... ok
+test_returns_at_most_10_results (test_recommender.TestGetRecommendations.test_returns_at_most_10_results) ... ok
+test_tiny_radius_returns_few_or_no_results (test_recommender.TestGetRecommendations.test_tiny_radius_returns_few_or_no_results) ... ok
+test_each_place_is_a_dictionary (test_recommender.TestLoadPlaces.test_each_place_is_a_dictionary) ... ok
+test_loads_53_places (test_recommender.TestLoadPlaces.test_loads_53_places) ... ok
+test_numeric_columns_are_correct_type (test_recommender.TestLoadPlaces.test_numeric_columns_are_correct_type) ... ok
+test_only_6_cities_present (test_recommender.TestLoadPlaces.test_only_6_cities_present) ... ok
+test_ratings_are_between_1_and_5 (test_recommender.TestLoadPlaces.test_ratings_are_between_1_and_5) ... ok
+test_required_keys_exist (test_recommender.TestLoadPlaces.test_required_keys_exist) ... ok
+test_returns_a_list (test_recommender.TestLoadPlaces.test_returns_a_list) ... ok
+test_does_not_modify_original_list (test_recommender.TestSortByRating.test_does_not_modify_original_list) ... ok
+test_first_place_has_highest_rating (test_recommender.TestSortByRating.test_first_place_has_highest_rating) ... ok
+test_last_place_has_lowest_rating (test_recommender.TestSortByRating.test_last_place_has_lowest_rating) ... ok
+test_ratings_are_in_descending_order (test_recommender.TestSortByRating.test_ratings_are_in_descending_order) ... ok
+test_tie_broken_by_distance (test_recommender.TestSortByRating.test_tie_broken_by_distance) ... ok
+test_missing_place_id_skipped (test_trails.TestGetTrailRoute.test_missing_place_id_skipped)
+If a place_id is not in all_places, it is silently skipped. ... ok
+test_places_returned_in_order (test_trails.TestGetTrailRoute.test_places_returned_in_order)
+get_trail_route must return places in the same order as place_ids. ... ok
+test_single_place_has_zero_steps (test_trails.TestGetTrailRoute.test_single_place_has_zero_steps)
+A trail with one place has no steps and total_km = 0. ... ok
+test_step_distance_matches_calculate_distance (test_trails.TestGetTrailRoute.test_step_distance_matches_calculate_distance)
+The first step distance must match calculate_distance between place 1 and 2. ... ok
+test_steps_count_is_places_minus_one (test_trails.TestGetTrailRoute.test_steps_count_is_places_minus_one)
+Number of step distances = number of places - 1. ... ok
+test_total_equals_sum_of_steps (test_trails.TestGetTrailRoute.test_total_equals_sum_of_steps)
+total_km must equal the sum of all step distances. ... ok
+test_api_cities_still_has_6_cities (test_trails.TestTrailOnlyExclusion.test_api_cities_still_has_6_cities)
+GET /api/cities must still return exactly 6 cities (trail places use town names). ... ok
+test_api_places_excludes_trail_only (test_trails.TestTrailOnlyExclusion.test_api_places_excludes_trail_only)
+GET /api/places must not include trail_only places. ... ok
+test_api_trail_detail_fort_trail (test_trails.TestTrailOnlyExclusion.test_api_trail_detail_fort_trail)
+GET /api/trail/3 (Fort Trail) must return 9 places. ... ok
+test_api_trail_detail_has_total_km (test_trails.TestTrailOnlyExclusion.test_api_trail_detail_has_total_km)
+Trail detail response must include total_km and driving_hours. ... ok
+test_api_trail_not_found (test_trails.TestTrailOnlyExclusion.test_api_trail_not_found)
+GET /api/trail/999 must return 404. ... ok
+test_api_trails_returns_4_trails (test_trails.TestTrailOnlyExclusion.test_api_trails_returns_4_trails)
+GET /api/trails must return exactly 4 trails. ... ok
+test_load_all_places_includes_trail_only (test_trails.TestTrailOnlyExclusion.test_load_all_places_includes_trail_only)
+load_all_places() must return all 66 places including trail_only. ... ok
+test_load_places_excludes_trail_only (test_trails.TestTrailOnlyExclusion.test_load_places_excludes_trail_only)
+load_places() must not return places with trail_only='yes'. ... ok
+test_load_places_returns_53_original (test_trails.TestTrailOnlyExclusion.test_load_places_returns_53_original)
+load_places() must return only the 53 original places. ... ok
+
+======================================================================
+FAIL: test_reset_otp_saved_for_known_email (test_auth.TestForgotPassword.test_reset_otp_saved_for_known_email)
+After /forgot-password, a reset_otp must be saved in MongoDB.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 370, in test_reset_otp_saved_for_known_email
+    self.assertIsNotNone(user["reset_otp"])
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_verified_user_can_login (test_auth.TestLogin.test_verified_user_can_login)
+A verified user with correct credentials must be redirected to /.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 246, in test_verified_user_can_login
+    self.assertEqual(r.status_code, 302)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 302
+
+======================================================================
+FAIL: test_wrong_password_rejected (test_auth.TestLogin.test_wrong_password_rejected)
+An incorrect password must show an error and stay on the login page.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 256, in test_wrong_password_rejected
+    self.assertIn(b"Incorrect password", r.data)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'Incorrect password' not found in b'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n  <title>Log In \xe2\x80\x94 Maharashtra Places</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: \'Noto Sans Devanagari\', Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }\n    .card { background: white; padding: 36px 40px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); width: 100%; max-width: 420px; }\n    h1 { color: #c0392b; font-size: 1.5rem; margin-bottom: 6px; }\n    .subtitle { color: #777; font-size: 0.9rem; margin-bottom: 24px; }\n    .field { margin-bottom: 16px; }\n    label { display: block; font-size: 0.82rem; font-weight: bold; color: #555; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 5px; }\n    input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; background: #fafafa; }\n    input:focus { outline: none; border-color: #c0392b; background: white; }\n    button { width: 100%; padding: 12px; background: #c0392b; color: white; font-size: 1rem; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 8px; }\n    button:hover { background: #a93226; }\n    .flash { padding: 10px 14px; border-radius: 5px; margin-bottom: 16px; font-size: 0.9rem; }\n    .flash.error   { background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; }\n    .flash.success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }\n    .footer-link { text-align: center; margin-top: 20px; font-size: 0.88rem; color: #777; }\n    .footer-link a { color: #c0392b; text-decoration: none; font-weight: bold; }\n  </style>\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">\n</head>\n<body>\n<!--\n  _lang_switch.html\n  A small reusable piece of HTML that shows the "English | \xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80" toggle.\n  Include it in any page with the Jinja2 include tag.\n\n  How it works:\n  1. The toggle shows two buttons: "English" and "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80"\n  2. When clicked, the JS function switchLang(lang) does two things:\n     a. Saves the choice in localStorage (browser memory \xe2\x80\x94 survives page refresh)\n     b. Calls POST /set-language so Flask saves it in the session too\n  3. After saving, the page reloads so all text updates immediately.\n  4. On page load, applyLang() reads localStorage and highlights\n     the active language button.\n\n  en comes from the Flask context processor in app.py \xe2\x80\x94\n  it is always available in every template automatically.\n-->\n\n<style>\n  /* \xe2\x94\x80\xe2\x94\x80 Language switch bar \xe2\x94\x80\xe2\x94\x80 */\n  .lang-bar {\n    background: #a93226;        /* slightly darker than the header red */\n    text-align: right;\n    padding: 4px 20px;\n    font-size: 0.82rem;\n  }\n\n  .lang-btn {\n    background: none;\n    border: 1px solid rgba(255,255,255,0.4);\n    color: white;\n    padding: 2px 10px;\n    border-radius: 3px;\n    cursor: pointer;\n    font-size: 0.82rem;\n    margin-left: 4px;\n    font-family: \'Noto Sans Devanagari\', Arial, sans-serif;\n  }\n\n  /* The currently active language button is brighter */\n  .lang-btn.active {\n    background: rgba(255,255,255,0.25);\n    border-color: white;\n    font-weight: bold;\n  }\n\n  .lang-btn:hover { background: rgba(255,255,255,0.15); }\n</style>\n\n<div class="lang-bar">\n  <!--\n    data-lang="en" and data-lang="mr" tell the JS which language to switch to.\n    The active class is added by applyLang() on page load.\n  -->\n  <button class="lang-btn" data-lang="en" onclick="switchLang(\'en\')">English</button>\n  <button class="lang-btn" data-lang="mr" onclick="switchLang(\'mr\')">\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80</button>\n</div>\n\n<!--\n  Load the translations dictionary BEFORE the script below,\n  so get() and setLanguage() are available immediately.\n  The /static/ path is served by Flask automatically.\n-->\n<script src="/static/translations.js"></script>\n\n<script>\n  // \xe2\x94\x80\xe2\x94\x80 switchLang(lang) \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Called when the user clicks "English" or "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80".\n  // lang is either "en" or "mr".\n  function switchLang(lang) {\n    // Step 1: Save in browser localStorage so it survives page refresh\n    // localStorage is like a small key-value notebook in the browser.\n    localStorage.setItem("lang", lang);\n\n    // Step 2: Tell Flask to save it in the session too\n    // We use fetch() to send a POST request to /set-language\n    fetch("/set-language", {\n      method: "POST",\n      headers: { "Content-Type": "application/json" },\n      body: JSON.stringify({ lang: lang })\n    }).then(function() {\n      // Step 3: Reload the page so all text updates\n      window.location.reload();\n    });\n  }\n\n  // \xe2\x94\x80\xe2\x94\x80 applyLang() \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Runs on every page load.\n  // Reads the saved language from localStorage and highlights\n  // the matching button with the "active" CSS class.\n  // Also calls setLanguage() to swap all data-i18n text at once.\n  function applyLang() {\n    var saved = localStorage.getItem("lang") || "en";\n    var serverLang = "en";\n\n    if (saved !== serverLang) {\n      fetch("/set-language", {\n        method: "POST",\n        headers: { "Content-Type": "application/json" },\n        body: JSON.stringify({ lang: saved })\n      });\n    }\n\n    // Highlight the active button\n    document.querySelectorAll(".lang-btn").forEach(function(btn) {\n      if (btn.getAttribute("data-lang") === saved) {\n        btn.classList.add("active");\n      } else {\n        btn.classList.remove("active");\n      }\n    });\n\n    // Apply translations to all data-i18n elements on this page\n    if (typeof setLanguage === "function") {\n      setLanguage(saved);\n    }\n  }\n\n  applyLang();\n</script>\n<div class="card">\n\n  <h1 data-i18n="login.title">Welcome Back</h1>\n  <p class="subtitle" data-i18n="login.subtitle">Log in to discover places in Maharashtra</p>\n\n  \n    <div class="flash success">Account created! Enter the 6-digit code sent to your email.</div>\n  \n    <div class="flash success">Email verified! You can now log in.</div>\n  \n    <div class="flash error">Please enter a valid email address (example: name@gmail.com).</div>\n  \n\n  <!--\n    Fix 2: autocomplete="off" on the whole form \xe2\x80\x94 a broad hint to the browser.\n    Chrome sometimes ignores this, which is why we also use the per-field\n    attributes and the readonly trick below.\n  -->\n  <form id="login-form" method="POST" action="/login" autocomplete="off">\n    <div class="field">\n      <label for="login-email" data-i18n="login.email">Email Address</label>\n      <!--\n        Fix 2: autocomplete="off" \xe2\x80\x94 do not suggest saved emails.\n        Fix 3: readonly in HTML prevents autofill on page load.\n                onfocus removes readonly when the user clicks, so they can type.\n        id="login-email" is less likely to trigger Chrome\'s autofill than id="email".\n      -->\n      <input type="email" id="login-email" name="email"\n        autocomplete="off"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="common.placeholder.email"\n        data-i18n-title="common.email_hint"\n        placeholder="e.g. virbhadra@gmail.com"\n        pattern="[A-Za-z0-9._*%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}"\n        title="Enter a valid email like name@gmail.com"\n        maxlength="100" required />\n      <p style="font-size:0.78rem; color:#888; margin-top:4px;" data-i18n="common.email_hint">Enter a valid email like name@gmail.com</p>\n    </div>\n    <div class="field">\n      <label for="login-password" data-i18n="login.password">Password</label>\n      <!--\n        Fix 2: autocomplete="new-password" \xe2\x80\x94 the specific value that tells Chrome\n        "do not fill a saved password here". Using "current-password" would invite\n        Chrome to fill it, so we deliberately use "new-password" to suppress that.\n        Fix 3: readonly + onfocus \xe2\x80\x94 same defence as the email box.\n      -->\n      <input type="password" id="login-password" name="password"\n        autocomplete="new-password"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="signup.placeholder.password"\n        placeholder="Enter password" required />\n    </div>\n    <button type="submit" data-i18n="login.btn">Log In</button>\n  </form>\n\n  <div style="text-align:right; margin-top: 8px; font-size: 0.85rem;">\n    <a href="/forgot-password" style="color:#c0392b; text-decoration:none;"\n       data-i18n="login.forgot">Forgot password?</a>\n  </div>\n\n  <div class="footer-link">\n    <span data-i18n="login.no_account">Don\'t have an account?</span>\n    <a href="/signup" data-i18n="login.signup_link">Sign up</a>\n  </div>\n\n</div>\n\n<script>\n  /*\n   * Fix 4: When the user presses the browser Back button, the page is\n   * restored from cache (event.persisted = true). The browser may re-fill\n   * old values at that moment. Calling form.reset() clears all fields\n   * so the boxes appear empty, as if the page had just loaded fresh.\n   */\n  window.addEventListener("pageshow", function(event) {\n    if (event.persisted) {\n      document.getElementById("login-form").reset();\n    }\n  });\n</script>\n</body>\n</html>'
+
+======================================================================
+FAIL: test_correct_otp_changes_password (test_auth.TestResetPassword.test_correct_otp_changes_password)
+The correct OTP with a valid new password must update the hash.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 483, in test_correct_otp_changes_password
+    self.assertIn("/login", r.headers.get("Location", ""))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '/login' not found in '/forgot-password'
+
+======================================================================
+FAIL: test_expired_otp_is_rejected (test_auth.TestResetPassword.test_expired_otp_is_rejected)
+An OTP whose expiry has passed must show 'expired', not 'ok'.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 470, in test_expired_otp_is_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+======================================================================
+FAIL: test_five_wrong_attempts_locks_the_user (test_auth.TestResetPassword.test_five_wrong_attempts_locks_the_user)
+After 5 wrong OTP guesses the user must see a 'locked' message.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 450, in test_five_wrong_attempts_locks_the_user
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+======================================================================
+FAIL: test_mismatched_new_passwords_rejected (test_auth.TestResetPassword.test_mismatched_new_passwords_rejected)
+New password and confirm must match.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 551, in test_mismatched_new_passwords_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+======================================================================
+FAIL: test_new_password_works_after_reset (test_auth.TestResetPassword.test_new_password_works_after_reset)
+After a successful reset the new password must allow login.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 529, in test_new_password_works_after_reset
+    self.assertEqual(r.status_code, 302)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 302
+
+======================================================================
+FAIL: test_old_password_no_longer_works_after_reset (test_auth.TestResetPassword.test_old_password_no_longer_works_after_reset)
+After a successful reset the old password must be rejected on login.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 515, in test_old_password_no_longer_works_after_reset
+    self.assertIn(b"Incorrect password", r.data)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'Incorrect password' not found in b'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n  <title>Log In \xe2\x80\x94 Maharashtra Places</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: \'Noto Sans Devanagari\', Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }\n    .card { background: white; padding: 36px 40px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); width: 100%; max-width: 420px; }\n    h1 { color: #c0392b; font-size: 1.5rem; margin-bottom: 6px; }\n    .subtitle { color: #777; font-size: 0.9rem; margin-bottom: 24px; }\n    .field { margin-bottom: 16px; }\n    label { display: block; font-size: 0.82rem; font-weight: bold; color: #555; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 5px; }\n    input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; background: #fafafa; }\n    input:focus { outline: none; border-color: #c0392b; background: white; }\n    button { width: 100%; padding: 12px; background: #c0392b; color: white; font-size: 1rem; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 8px; }\n    button:hover { background: #a93226; }\n    .flash { padding: 10px 14px; border-radius: 5px; margin-bottom: 16px; font-size: 0.9rem; }\n    .flash.error   { background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; }\n    .flash.success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }\n    .footer-link { text-align: center; margin-top: 20px; font-size: 0.88rem; color: #777; }\n    .footer-link a { color: #c0392b; text-decoration: none; font-weight: bold; }\n  </style>\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">\n</head>\n<body>\n<!--\n  _lang_switch.html\n  A small reusable piece of HTML that shows the "English | \xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80" toggle.\n  Include it in any page with the Jinja2 include tag.\n\n  How it works:\n  1. The toggle shows two buttons: "English" and "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80"\n  2. When clicked, the JS function switchLang(lang) does two things:\n     a. Saves the choice in localStorage (browser memory \xe2\x80\x94 survives page refresh)\n     b. Calls POST /set-language so Flask saves it in the session too\n  3. After saving, the page reloads so all text updates immediately.\n  4. On page load, applyLang() reads localStorage and highlights\n     the active language button.\n\n  en comes from the Flask context processor in app.py \xe2\x80\x94\n  it is always available in every template automatically.\n-->\n\n<style>\n  /* \xe2\x94\x80\xe2\x94\x80 Language switch bar \xe2\x94\x80\xe2\x94\x80 */\n  .lang-bar {\n    background: #a93226;        /* slightly darker than the header red */\n    text-align: right;\n    padding: 4px 20px;\n    font-size: 0.82rem;\n  }\n\n  .lang-btn {\n    background: none;\n    border: 1px solid rgba(255,255,255,0.4);\n    color: white;\n    padding: 2px 10px;\n    border-radius: 3px;\n    cursor: pointer;\n    font-size: 0.82rem;\n    margin-left: 4px;\n    font-family: \'Noto Sans Devanagari\', Arial, sans-serif;\n  }\n\n  /* The currently active language button is brighter */\n  .lang-btn.active {\n    background: rgba(255,255,255,0.25);\n    border-color: white;\n    font-weight: bold;\n  }\n\n  .lang-btn:hover { background: rgba(255,255,255,0.15); }\n</style>\n\n<div class="lang-bar">\n  <!--\n    data-lang="en" and data-lang="mr" tell the JS which language to switch to.\n    The active class is added by applyLang() on page load.\n  -->\n  <button class="lang-btn" data-lang="en" onclick="switchLang(\'en\')">English</button>\n  <button class="lang-btn" data-lang="mr" onclick="switchLang(\'mr\')">\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80</button>\n</div>\n\n<!--\n  Load the translations dictionary BEFORE the script below,\n  so get() and setLanguage() are available immediately.\n  The /static/ path is served by Flask automatically.\n-->\n<script src="/static/translations.js"></script>\n\n<script>\n  // \xe2\x94\x80\xe2\x94\x80 switchLang(lang) \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Called when the user clicks "English" or "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80".\n  // lang is either "en" or "mr".\n  function switchLang(lang) {\n    // Step 1: Save in browser localStorage so it survives page refresh\n    // localStorage is like a small key-value notebook in the browser.\n    localStorage.setItem("lang", lang);\n\n    // Step 2: Tell Flask to save it in the session too\n    // We use fetch() to send a POST request to /set-language\n    fetch("/set-language", {\n      method: "POST",\n      headers: { "Content-Type": "application/json" },\n      body: JSON.stringify({ lang: lang })\n    }).then(function() {\n      // Step 3: Reload the page so all text updates\n      window.location.reload();\n    });\n  }\n\n  // \xe2\x94\x80\xe2\x94\x80 applyLang() \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Runs on every page load.\n  // Reads the saved language from localStorage and highlights\n  // the matching button with the "active" CSS class.\n  // Also calls setLanguage() to swap all data-i18n text at once.\n  function applyLang() {\n    var saved = localStorage.getItem("lang") || "en";\n    var serverLang = "en";\n\n    if (saved !== serverLang) {\n      fetch("/set-language", {\n        method: "POST",\n        headers: { "Content-Type": "application/json" },\n        body: JSON.stringify({ lang: saved })\n      });\n    }\n\n    // Highlight the active button\n    document.querySelectorAll(".lang-btn").forEach(function(btn) {\n      if (btn.getAttribute("data-lang") === saved) {\n        btn.classList.add("active");\n      } else {\n        btn.classList.remove("active");\n      }\n    });\n\n    // Apply translations to all data-i18n elements on this page\n    if (typeof setLanguage === "function") {\n      setLanguage(saved);\n    }\n  }\n\n  applyLang();\n</script>\n<div class="card">\n\n  <h1 data-i18n="login.title">Welcome Back</h1>\n  <p class="subtitle" data-i18n="login.subtitle">Log in to discover places in Maharashtra</p>\n\n  \n    <div class="flash error">Please enter a valid email address (example: name@gmail.com).</div>\n  \n\n  <!--\n    Fix 2: autocomplete="off" on the whole form \xe2\x80\x94 a broad hint to the browser.\n    Chrome sometimes ignores this, which is why we also use the per-field\n    attributes and the readonly trick below.\n  -->\n  <form id="login-form" method="POST" action="/login" autocomplete="off">\n    <div class="field">\n      <label for="login-email" data-i18n="login.email">Email Address</label>\n      <!--\n        Fix 2: autocomplete="off" \xe2\x80\x94 do not suggest saved emails.\n        Fix 3: readonly in HTML prevents autofill on page load.\n                onfocus removes readonly when the user clicks, so they can type.\n        id="login-email" is less likely to trigger Chrome\'s autofill than id="email".\n      -->\n      <input type="email" id="login-email" name="email"\n        autocomplete="off"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="common.placeholder.email"\n        data-i18n-title="common.email_hint"\n        placeholder="e.g. virbhadra@gmail.com"\n        pattern="[A-Za-z0-9._*%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}"\n        title="Enter a valid email like name@gmail.com"\n        maxlength="100" required />\n      <p style="font-size:0.78rem; color:#888; margin-top:4px;" data-i18n="common.email_hint">Enter a valid email like name@gmail.com</p>\n    </div>\n    <div class="field">\n      <label for="login-password" data-i18n="login.password">Password</label>\n      <!--\n        Fix 2: autocomplete="new-password" \xe2\x80\x94 the specific value that tells Chrome\n        "do not fill a saved password here". Using "current-password" would invite\n        Chrome to fill it, so we deliberately use "new-password" to suppress that.\n        Fix 3: readonly + onfocus \xe2\x80\x94 same defence as the email box.\n      -->\n      <input type="password" id="login-password" name="password"\n        autocomplete="new-password"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="signup.placeholder.password"\n        placeholder="Enter password" required />\n    </div>\n    <button type="submit" data-i18n="login.btn">Log In</button>\n  </form>\n\n  <div style="text-align:right; margin-top: 8px; font-size: 0.85rem;">\n    <a href="/forgot-password" style="color:#c0392b; text-decoration:none;"\n       data-i18n="login.forgot">Forgot password?</a>\n  </div>\n\n  <div class="footer-link">\n    <span data-i18n="login.no_account">Don\'t have an account?</span>\n    <a href="/signup" data-i18n="login.signup_link">Sign up</a>\n  </div>\n\n</div>\n\n<script>\n  /*\n   * Fix 4: When the user presses the browser Back button, the page is\n   * restored from cache (event.persisted = true). The browser may re-fill\n   * old values at that moment. Calling form.reset() clears all fields\n   * so the boxes appear empty, as if the page had just loaded fresh.\n   */\n  window.addEventListener("pageshow", function(event) {\n    if (event.persisted) {\n      document.getElementById("login-form").reset();\n    }\n  });\n</script>\n</body>\n</html>'
+
+======================================================================
+FAIL: test_resend_reset_otp_resets_attempt_counter (test_auth.TestResetPassword.test_resend_reset_otp_resets_attempt_counter)
+After being locked (5 wrong attempts), requesting a new code
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 566, in test_resend_reset_otp_resets_attempt_counter
+    self.assertEqual(user["reset_attempts"], 5)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 5
+
+======================================================================
+FAIL: test_reset_password_page_loads (test_auth.TestResetPassword.test_reset_password_page_loads)
+GET /reset-password must return 200 when reset_email is in session.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 416, in test_reset_password_page_loads
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+======================================================================
+FAIL: test_short_new_password_rejected (test_auth.TestResetPassword.test_short_new_password_rejected)
+A new password shorter than 8 characters must be rejected.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 540, in test_short_new_password_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+======================================================================
+FAIL: test_wrong_otp_increments_attempt_counter (test_auth.TestResetPassword.test_wrong_otp_increments_attempt_counter)
+Each wrong OTP guess must increase reset_attempts by 1.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 436, in test_wrong_otp_increments_attempt_counter
+    self.assertEqual(user["reset_attempts"], 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_wrong_otp_is_rejected (test_auth.TestResetPassword.test_wrong_otp_is_rejected)
+An incorrect reset OTP must show an error and stay on the page.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 426, in test_wrong_otp_is_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+======================================================================
+FAIL: test_marathi_message (test_features.TestGetMessage.test_marathi_message)
+get_message returns Marathi text when lang='mr'.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1661, in test_marathi_message
+    self.assertIn("à¤šà¥à¤•à¥€à¤šà¤¾", result)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'à¤šà¥\x81à¤•à¥€à¤šà¤¾' not found in 'चुकीचा कोड. कृपया पुन्हा प्रयत्न करा.'
+
+======================================================================
+FAIL: test_reset_success_marathi (test_features.TestGetMessage.test_reset_success_marathi)
+Password changed message is correct in Marathi.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1711, in test_reset_success_marathi
+    self.assertIn("à¤ªà¤¾à¤¸à¤µà¤°à¥à¤¡", result)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'à¤ªà¤¾à¤¸à¤µà¤°à¥\x8dà¤¡' not found in 'पासवर्ड यशस्वीरित्या बदलला. कृपया लॉग इन करा.'
+
+======================================================================
+FAIL: test_signup_success_marathi (test_features.TestGetMessage.test_signup_success_marathi)
+Signup success message is correct in Marathi.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1701, in test_signup_success_marathi
+    self.assertIn("à¤–à¤¾à¤¤à¥‡", result)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'à¤–à¤¾à¤¤à¥‡' not found in 'खाते तयार झाले! तुमच्या ईमेलवर पाठवलेला ६-अंकी कोड टाका.'
+
+======================================================================
+FAIL: test_api_search_finds_by_marathi_name (test_features.TestLanguageAPI.test_api_search_finds_by_marathi_name)
+/api/search must find places by their Marathi name.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1567, in test_api_search_finds_by_marathi_name
+    self.assertTrue(
+    ~~~~~~~~~~~~~~~^
+    
+    
+    ...<3 lines>...
+    
+    
+    )
+    ^
+AssertionError: False is not true : Expected Gateway of India in results, got: []
+
+----------------------------------------------------------------------
+Ran 218 tests in 10.284s
+
+FAILED (failures=18)
+
+Tests run : 218
+Failures  : 18
+Errors    : 0
+OVERALL   : SOME TESTS FAILED
+
+--- FAIL/ERROR: test_reset_otp_saved_for_known_email (test_auth.TestForgotPassword.test_reset_otp_saved_for_known_email) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 370, in test_reset_otp_saved_for_known_email
+    self.assertIsNotNone(user["reset_otp"])
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None
+
+
+--- FAIL/ERROR: test_verified_user_can_login (test_auth.TestLogin.test_verified_user_can_login) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 246, in test_verified_user_can_login
+    self.assertEqual(r.status_code, 302)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 302
+
+
+--- FAIL/ERROR: test_wrong_password_rejected (test_auth.TestLogin.test_wrong_password_rejected) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 256, in test_wrong_password_rejected
+    self.assertIn(b"Incorrect password", r.data)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'Incorrect password' not found in b'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n  <title>Log In \xe2\x80\x94 Maharashtra Places</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: \'Noto Sans Devanagari\', Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }\n    .card { background: white; padding: 36px 40px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); width: 100%; max-width: 420px; }\n    h1 { color: #c0392b; font-size: 1.5rem; margin-bottom: 6px; }\n    .subtitle { color: #777; font-size: 0.9rem; margin-bottom: 24px; }\n    .field { margin-bottom: 16px; }\n    label { display: block; font-size: 0.82rem; font-weight: bold; color: #555; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 5px; }\n    input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; background: #fafafa; }\n    input:focus { outline: none; border-color: #c0392b; background: white; }\n    button { width: 100%; padding: 12px; background: #c0392b; color: white; font-size: 1rem; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 8px; }\n    button:hover { background: #a93226; }\n    .flash { padding: 10px 14px; border-radius: 5px; margin-bottom: 16px; font-size: 0.9rem; }\n    .flash.error   { background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; }\n    .flash.success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }\n    .footer-link { text-align: center; margin-top: 20px; font-size: 0.88rem; color: #777; }\n    .footer-link a { color: #c0392b; text-decoration: none; font-weight: bold; }\n  </style>\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">\n</head>\n<body>\n<!--\n  _lang_switch.html\n  A small reusable piece of HTML that shows the "English | \xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80" toggle.\n  Include it in any page with the Jinja2 include tag.\n\n  How it works:\n  1. The toggle shows two buttons: "English" and "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80"\n  2. When clicked, the JS function switchLang(lang) does two things:\n     a. Saves the choice in localStorage (browser memory \xe2\x80\x94 survives page refresh)\n     b. Calls POST /set-language so Flask saves it in the session too\n  3. After saving, the page reloads so all text updates immediately.\n  4. On page load, applyLang() reads localStorage and highlights\n     the active language button.\n\n  en comes from the Flask context processor in app.py \xe2\x80\x94\n  it is always available in every template automatically.\n-->\n\n<style>\n  /* \xe2\x94\x80\xe2\x94\x80 Language switch bar \xe2\x94\x80\xe2\x94\x80 */\n  .lang-bar {\n    background: #a93226;        /* slightly darker than the header red */\n    text-align: right;\n    padding: 4px 20px;\n    font-size: 0.82rem;\n  }\n\n  .lang-btn {\n    background: none;\n    border: 1px solid rgba(255,255,255,0.4);\n    color: white;\n    padding: 2px 10px;\n    border-radius: 3px;\n    cursor: pointer;\n    font-size: 0.82rem;\n    margin-left: 4px;\n    font-family: \'Noto Sans Devanagari\', Arial, sans-serif;\n  }\n\n  /* The currently active language button is brighter */\n  .lang-btn.active {\n    background: rgba(255,255,255,0.25);\n    border-color: white;\n    font-weight: bold;\n  }\n\n  .lang-btn:hover { background: rgba(255,255,255,0.15); }\n</style>\n\n<div class="lang-bar">\n  <!--\n    data-lang="en" and data-lang="mr" tell the JS which language to switch to.\n    The active class is added by applyLang() on page load.\n  -->\n  <button class="lang-btn" data-lang="en" onclick="switchLang(\'en\')">English</button>\n  <button class="lang-btn" data-lang="mr" onclick="switchLang(\'mr\')">\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80</button>\n</div>\n\n<!--\n  Load the translations dictionary BEFORE the script below,\n  so get() and setLanguage() are available immediately.\n  The /static/ path is served by Flask automatically.\n-->\n<script src="/static/translations.js"></script>\n\n<script>\n  // \xe2\x94\x80\xe2\x94\x80 switchLang(lang) \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Called when the user clicks "English" or "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80".\n  // lang is either "en" or "mr".\n  function switchLang(lang) {\n    // Step 1: Save in browser localStorage so it survives page refresh\n    // localStorage is like a small key-value notebook in the browser.\n    localStorage.setItem("lang", lang);\n\n    // Step 2: Tell Flask to save it in the session too\n    // We use fetch() to send a POST request to /set-language\n    fetch("/set-language", {\n      method: "POST",\n      headers: { "Content-Type": "application/json" },\n      body: JSON.stringify({ lang: lang })\n    }).then(function() {\n      // Step 3: Reload the page so all text updates\n      window.location.reload();\n    });\n  }\n\n  // \xe2\x94\x80\xe2\x94\x80 applyLang() \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Runs on every page load.\n  // Reads the saved language from localStorage and highlights\n  // the matching button with the "active" CSS class.\n  // Also calls setLanguage() to swap all data-i18n text at once.\n  function applyLang() {\n    var saved = localStorage.getItem("lang") || "en";\n    var serverLang = "en";\n\n    if (saved !== serverLang) {\n      fetch("/set-language", {\n        method: "POST",\n        headers: { "Content-Type": "application/json" },\n        body: JSON.stringify({ lang: saved })\n      });\n    }\n\n    // Highlight the active button\n    document.querySelectorAll(".lang-btn").forEach(function(btn) {\n      if (btn.getAttribute("data-lang") === saved) {\n        btn.classList.add("active");\n      } else {\n        btn.classList.remove("active");\n      }\n    });\n\n    // Apply translations to all data-i18n elements on this page\n    if (typeof setLanguage === "function") {\n      setLanguage(saved);\n    }\n  }\n\n  applyLang();\n</script>\n<div class="card">\n\n  <h1 data-i18n="login.title">Welcome Back</h1>\n  <p class="subtitle" data-i18n="login.subtitle">Log in to discover places in Maharashtra</p>\n\n  \n    <div class="flash success">Account created! Enter the 6-digit code sent to your email.</div>\n  \n    <div class="flash success">Email verified! You can now log in.</div>\n  \n    <div class="flash error">Please enter a valid email address (example: name@gmail.com).</div>\n  \n\n  <!--\n    Fix 2: autocomplete="off" on the whole form \xe2\x80\x94 a broad hint to the browser.\n    Chrome sometimes ignores this, which is why we also use the per-field\n    attributes and the readonly trick below.\n  -->\n  <form id="login-form" method="POST" action="/login" autocomplete="off">\n    <div class="field">\n      <label for="login-email" data-i18n="login.email">Email Address</label>\n      <!--\n        Fix 2: autocomplete="off" \xe2\x80\x94 do not suggest saved emails.\n        Fix 3: readonly in HTML prevents autofill on page load.\n                onfocus removes readonly when the user clicks, so they can type.\n        id="login-email" is less likely to trigger Chrome\'s autofill than id="email".\n      -->\n      <input type="email" id="login-email" name="email"\n        autocomplete="off"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="common.placeholder.email"\n        data-i18n-title="common.email_hint"\n        placeholder="e.g. virbhadra@gmail.com"\n        pattern="[A-Za-z0-9._*%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}"\n        title="Enter a valid email like name@gmail.com"\n        maxlength="100" required />\n      <p style="font-size:0.78rem; color:#888; margin-top:4px;" data-i18n="common.email_hint">Enter a valid email like name@gmail.com</p>\n    </div>\n    <div class="field">\n      <label for="login-password" data-i18n="login.password">Password</label>\n      <!--\n        Fix 2: autocomplete="new-password" \xe2\x80\x94 the specific value that tells Chrome\n        "do not fill a saved password here". Using "current-password" would invite\n        Chrome to fill it, so we deliberately use "new-password" to suppress that.\n        Fix 3: readonly + onfocus \xe2\x80\x94 same defence as the email box.\n      -->\n      <input type="password" id="login-password" name="password"\n        autocomplete="new-password"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="signup.placeholder.password"\n        placeholder="Enter password" required />\n    </div>\n    <button type="submit" data-i18n="login.btn">Log In</button>\n  </form>\n\n  <div style="text-align:right; margin-top: 8px; font-size: 0.85rem;">\n    <a href="/forgot-password" style="color:#c0392b; text-decoration:none;"\n       data-i18n="login.forgot">Forgot password?</a>\n  </div>\n\n  <div class="footer-link">\n    <span data-i18n="login.no_account">Don\'t have an account?</span>\n    <a href="/signup" data-i18n="login.signup_link">Sign up</a>\n  </div>\n\n</div>\n\n<script>\n  /*\n   * Fix 4: When the user presses the browser Back button, the page is\n   * restored from cache (event.persisted = true). The browser may re-fill\n   * old values at that moment. Calling form.reset() clears all fields\n   * so the boxes appear empty, as if the page had just loaded fresh.\n   */\n  window.addEventListener("pageshow", function(event) {\n    if (event.persisted) {\n      document.getElementById("login-form").reset();\n    }\n  });\n</script>\n</body>\n</html>'
+
+
+--- FAIL/ERROR: test_correct_otp_changes_password (test_auth.TestResetPassword.test_correct_otp_changes_password) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 483, in test_correct_otp_changes_password
+    self.assertIn("/login", r.headers.get("Location", ""))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '/login' not found in '/forgot-password'
+
+
+--- FAIL/ERROR: test_expired_otp_is_rejected (test_auth.TestResetPassword.test_expired_otp_is_rejected) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 470, in test_expired_otp_is_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+
+--- FAIL/ERROR: test_five_wrong_attempts_locks_the_user (test_auth.TestResetPassword.test_five_wrong_attempts_locks_the_user) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 450, in test_five_wrong_attempts_locks_the_user
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+
+--- FAIL/ERROR: test_mismatched_new_passwords_rejected (test_auth.TestResetPassword.test_mismatched_new_passwords_rejected) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 551, in test_mismatched_new_passwords_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+
+--- FAIL/ERROR: test_new_password_works_after_reset (test_auth.TestResetPassword.test_new_password_works_after_reset) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 529, in test_new_password_works_after_reset
+    self.assertEqual(r.status_code, 302)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 302
+
+
+--- FAIL/ERROR: test_old_password_no_longer_works_after_reset (test_auth.TestResetPassword.test_old_password_no_longer_works_after_reset) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 515, in test_old_password_no_longer_works_after_reset
+    self.assertIn(b"Incorrect password", r.data)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'Incorrect password' not found in b'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n  <title>Log In \xe2\x80\x94 Maharashtra Places</title>\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: \'Noto Sans Devanagari\', Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }\n    .card { background: white; padding: 36px 40px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); width: 100%; max-width: 420px; }\n    h1 { color: #c0392b; font-size: 1.5rem; margin-bottom: 6px; }\n    .subtitle { color: #777; font-size: 0.9rem; margin-bottom: 24px; }\n    .field { margin-bottom: 16px; }\n    label { display: block; font-size: 0.82rem; font-weight: bold; color: #555; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 5px; }\n    input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.95rem; background: #fafafa; }\n    input:focus { outline: none; border-color: #c0392b; background: white; }\n    button { width: 100%; padding: 12px; background: #c0392b; color: white; font-size: 1rem; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 8px; }\n    button:hover { background: #a93226; }\n    .flash { padding: 10px 14px; border-radius: 5px; margin-bottom: 16px; font-size: 0.9rem; }\n    .flash.error   { background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; }\n    .flash.success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }\n    .footer-link { text-align: center; margin-top: 20px; font-size: 0.88rem; color: #777; }\n    .footer-link a { color: #c0392b; text-decoration: none; font-weight: bold; }\n  </style>\n  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">\n</head>\n<body>\n<!--\n  _lang_switch.html\n  A small reusable piece of HTML that shows the "English | \xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80" toggle.\n  Include it in any page with the Jinja2 include tag.\n\n  How it works:\n  1. The toggle shows two buttons: "English" and "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80"\n  2. When clicked, the JS function switchLang(lang) does two things:\n     a. Saves the choice in localStorage (browser memory \xe2\x80\x94 survives page refresh)\n     b. Calls POST /set-language so Flask saves it in the session too\n  3. After saving, the page reloads so all text updates immediately.\n  4. On page load, applyLang() reads localStorage and highlights\n     the active language button.\n\n  en comes from the Flask context processor in app.py \xe2\x80\x94\n  it is always available in every template automatically.\n-->\n\n<style>\n  /* \xe2\x94\x80\xe2\x94\x80 Language switch bar \xe2\x94\x80\xe2\x94\x80 */\n  .lang-bar {\n    background: #a93226;        /* slightly darker than the header red */\n    text-align: right;\n    padding: 4px 20px;\n    font-size: 0.82rem;\n  }\n\n  .lang-btn {\n    background: none;\n    border: 1px solid rgba(255,255,255,0.4);\n    color: white;\n    padding: 2px 10px;\n    border-radius: 3px;\n    cursor: pointer;\n    font-size: 0.82rem;\n    margin-left: 4px;\n    font-family: \'Noto Sans Devanagari\', Arial, sans-serif;\n  }\n\n  /* The currently active language button is brighter */\n  .lang-btn.active {\n    background: rgba(255,255,255,0.25);\n    border-color: white;\n    font-weight: bold;\n  }\n\n  .lang-btn:hover { background: rgba(255,255,255,0.15); }\n</style>\n\n<div class="lang-bar">\n  <!--\n    data-lang="en" and data-lang="mr" tell the JS which language to switch to.\n    The active class is added by applyLang() on page load.\n  -->\n  <button class="lang-btn" data-lang="en" onclick="switchLang(\'en\')">English</button>\n  <button class="lang-btn" data-lang="mr" onclick="switchLang(\'mr\')">\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80</button>\n</div>\n\n<!--\n  Load the translations dictionary BEFORE the script below,\n  so get() and setLanguage() are available immediately.\n  The /static/ path is served by Flask automatically.\n-->\n<script src="/static/translations.js"></script>\n\n<script>\n  // \xe2\x94\x80\xe2\x94\x80 switchLang(lang) \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Called when the user clicks "English" or "\xe0\xa4\xae\xe0\xa4\xb0\xe0\xa4\xbe\xe0\xa4\xa0\xe0\xa5\x80".\n  // lang is either "en" or "mr".\n  function switchLang(lang) {\n    // Step 1: Save in browser localStorage so it survives page refresh\n    // localStorage is like a small key-value notebook in the browser.\n    localStorage.setItem("lang", lang);\n\n    // Step 2: Tell Flask to save it in the session too\n    // We use fetch() to send a POST request to /set-language\n    fetch("/set-language", {\n      method: "POST",\n      headers: { "Content-Type": "application/json" },\n      body: JSON.stringify({ lang: lang })\n    }).then(function() {\n      // Step 3: Reload the page so all text updates\n      window.location.reload();\n    });\n  }\n\n  // \xe2\x94\x80\xe2\x94\x80 applyLang() \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n  // Runs on every page load.\n  // Reads the saved language from localStorage and highlights\n  // the matching button with the "active" CSS class.\n  // Also calls setLanguage() to swap all data-i18n text at once.\n  function applyLang() {\n    var saved = localStorage.getItem("lang") || "en";\n    var serverLang = "en";\n\n    if (saved !== serverLang) {\n      fetch("/set-language", {\n        method: "POST",\n        headers: { "Content-Type": "application/json" },\n        body: JSON.stringify({ lang: saved })\n      });\n    }\n\n    // Highlight the active button\n    document.querySelectorAll(".lang-btn").forEach(function(btn) {\n      if (btn.getAttribute("data-lang") === saved) {\n        btn.classList.add("active");\n      } else {\n        btn.classList.remove("active");\n      }\n    });\n\n    // Apply translations to all data-i18n elements on this page\n    if (typeof setLanguage === "function") {\n      setLanguage(saved);\n    }\n  }\n\n  applyLang();\n</script>\n<div class="card">\n\n  <h1 data-i18n="login.title">Welcome Back</h1>\n  <p class="subtitle" data-i18n="login.subtitle">Log in to discover places in Maharashtra</p>\n\n  \n    <div class="flash error">Please enter a valid email address (example: name@gmail.com).</div>\n  \n\n  <!--\n    Fix 2: autocomplete="off" on the whole form \xe2\x80\x94 a broad hint to the browser.\n    Chrome sometimes ignores this, which is why we also use the per-field\n    attributes and the readonly trick below.\n  -->\n  <form id="login-form" method="POST" action="/login" autocomplete="off">\n    <div class="field">\n      <label for="login-email" data-i18n="login.email">Email Address</label>\n      <!--\n        Fix 2: autocomplete="off" \xe2\x80\x94 do not suggest saved emails.\n        Fix 3: readonly in HTML prevents autofill on page load.\n                onfocus removes readonly when the user clicks, so they can type.\n        id="login-email" is less likely to trigger Chrome\'s autofill than id="email".\n      -->\n      <input type="email" id="login-email" name="email"\n        autocomplete="off"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="common.placeholder.email"\n        data-i18n-title="common.email_hint"\n        placeholder="e.g. virbhadra@gmail.com"\n        pattern="[A-Za-z0-9._*%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}"\n        title="Enter a valid email like name@gmail.com"\n        maxlength="100" required />\n      <p style="font-size:0.78rem; color:#888; margin-top:4px;" data-i18n="common.email_hint">Enter a valid email like name@gmail.com</p>\n    </div>\n    <div class="field">\n      <label for="login-password" data-i18n="login.password">Password</label>\n      <!--\n        Fix 2: autocomplete="new-password" \xe2\x80\x94 the specific value that tells Chrome\n        "do not fill a saved password here". Using "current-password" would invite\n        Chrome to fill it, so we deliberately use "new-password" to suppress that.\n        Fix 3: readonly + onfocus \xe2\x80\x94 same defence as the email box.\n      -->\n      <input type="password" id="login-password" name="password"\n        autocomplete="new-password"\n        readonly\n        onfocus="this.removeAttribute(\'readonly\')"\n        data-i18n-placeholder="signup.placeholder.password"\n        placeholder="Enter password" required />\n    </div>\n    <button type="submit" data-i18n="login.btn">Log In</button>\n  </form>\n\n  <div style="text-align:right; margin-top: 8px; font-size: 0.85rem;">\n    <a href="/forgot-password" style="color:#c0392b; text-decoration:none;"\n       data-i18n="login.forgot">Forgot password?</a>\n  </div>\n\n  <div class="footer-link">\n    <span data-i18n="login.no_account">Don\'t have an account?</span>\n    <a href="/signup" data-i18n="login.signup_link">Sign up</a>\n  </div>\n\n</div>\n\n<script>\n  /*\n   * Fix 4: When the user presses the browser Back button, the page is\n   * restored from cache (event.persisted = true). The browser may re-fill\n   * old values at that moment. Calling form.reset() clears all fields\n   * so the boxes appear empty, as if the page had just loaded fresh.\n   */\n  window.addEventListener("pageshow", function(event) {\n    if (event.persisted) {\n      document.getElementById("login-form").reset();\n    }\n  });\n</script>\n</body>\n</html>'
+
+
+--- FAIL/ERROR: test_resend_reset_otp_resets_attempt_counter (test_auth.TestResetPassword.test_resend_reset_otp_resets_attempt_counter) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 566, in test_resend_reset_otp_resets_attempt_counter
+    self.assertEqual(user["reset_attempts"], 5)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 5
+
+
+--- FAIL/ERROR: test_reset_password_page_loads (test_auth.TestResetPassword.test_reset_password_page_loads) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 416, in test_reset_password_page_loads
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+
+--- FAIL/ERROR: test_short_new_password_rejected (test_auth.TestResetPassword.test_short_new_password_rejected) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 540, in test_short_new_password_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+
+--- FAIL/ERROR: test_wrong_otp_increments_attempt_counter (test_auth.TestResetPassword.test_wrong_otp_increments_attempt_counter) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 436, in test_wrong_otp_increments_attempt_counter
+    self.assertEqual(user["reset_attempts"], 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+
+--- FAIL/ERROR: test_wrong_otp_is_rejected (test_auth.TestResetPassword.test_wrong_otp_is_rejected) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_auth.py", line 426, in test_wrong_otp_is_rejected
+    self.assertEqual(r.status_code, 200)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 302 != 200
+
+
+--- FAIL/ERROR: test_marathi_message (test_features.TestGetMessage.test_marathi_message) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1661, in test_marathi_message
+    self.assertIn("à¤šà¥à¤•à¥€à¤šà¤¾", result)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'à¤šà¥\x81à¤•à¥€à¤šà¤¾' not found in 'चुकीचा कोड. कृपया पुन्हा प्रयत्न करा.'
+
+
+--- FAIL/ERROR: test_reset_success_marathi (test_features.TestGetMessage.test_reset_success_marathi) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1711, in test_reset_success_marathi
+    self.assertIn("à¤ªà¤¾à¤¸à¤µà¤°à¥à¤¡", result)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'à¤ªà¤¾à¤¸à¤µà¤°à¥\x8dà¤¡' not found in 'पासवर्ड यशस्वीरित्या बदलला. कृपया लॉग इन करा.'
+
+
+--- FAIL/ERROR: test_signup_success_marathi (test_features.TestGetMessage.test_signup_success_marathi) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1701, in test_signup_success_marathi
+    self.assertIn("à¤–à¤¾à¤¤à¥‡", result)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'à¤–à¤¾à¤¤à¥‡' not found in 'खाते तयार झाले! तुमच्या ईमेलवर पाठवलेला ६-अंकी कोड टाका.'
+
+
+--- FAIL/ERROR: test_api_search_finds_by_marathi_name (test_features.TestLanguageAPI.test_api_search_finds_by_marathi_name) ---
+Traceback (most recent call last):
+  File "C:\Users\VIRBHADRA\OneDrive\Desktop\maharashtra-places\tests\test_features.py", line 1567, in test_api_search_finds_by_marathi_name
+    self.assertTrue(
+    ~~~~~~~~~~~~~~~^
+    
+    
+    ...<3 lines>...
+    
+    
+    )
+    ^
+AssertionError: False is not true : Expected Gateway of India in results, got: []
+
